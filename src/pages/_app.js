@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import NextNprogress from "nextjs-progressbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../scss/global.scss";
 import { CartProvider, AuthProvider } from "@/contexts";
