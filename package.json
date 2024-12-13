@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "next-boost": "^0.12.0",
     "next-images": "^1.8.5",
@@ -18,6 +17,7 @@
     "react-dropzone": "^14.2.3",
 
     "@dotdev/next-boost": "^2.1.1",
+    "@types/jwt-decode": "^3.1.0",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "create-next-pwa": "^3.4.3",
