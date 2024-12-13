@@ -25,7 +25,6 @@
     "formik": "^2.4.6",
     "next": "14.2.3",
     "next-compose-plugins": "^2.2.1",
-    "next-progressbar": "^1.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-dropzone-component": "^3.2.0",

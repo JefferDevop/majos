@@ -73,13 +73,6 @@ export default function App(props) {
 
   return (
     <>
-      <NextNprogress
-        color="#FF0"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={10}
-      />
-
       <AuthProvider>
         <CartProvider>
           <Component {...pageProps} />
