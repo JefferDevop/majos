@@ -26,7 +26,7 @@ export function BtnModal() {
   };
 
   function handleClickAdmin() {
-    router.push("https://majos.catalogointeractivo.com.co/admin-dashboard/");
+    router.push("https://majos.conexion.bar/admin-dashboard/");
   }
 
   function handleClickClient() {
