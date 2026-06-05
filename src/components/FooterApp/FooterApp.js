@@ -20,7 +20,7 @@ export function FooterApp() {
         />
 
         <WhatsApp
-          phoneNumber="+573103900666"
+          phoneNumber="+573127527596"
           message="Hola, me gustaría obtener más información sobre sus productos."
         />
         {/* <BtnLink
