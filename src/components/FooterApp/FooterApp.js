@@ -1,14 +1,92 @@
-import { WhatsApp } from "../WhatsApp";
-import { BtnLink, BtnModal } from "../Common";
-import { useCart } from "@/hooks/useCart";
+// import { WhatsApp } from "../WhatsApp";
+// import { BtnLink, BtnModal } from "../Common";
+// import { useCart } from "@/hooks/useCart";
 
-import { MdOutlineCategory } from "react-icons/md";
+// import { MdOutlineCategory } from "react-icons/md";
+// import { CiUser } from "react-icons/ci";
+// import { AiOutlineShoppingCart } from "react-icons/ai";
+// import { AiOutlineHome } from "react-icons/ai";
+// import styles from "./FooterApp.module.scss";
+// export function FooterApp() {
+//   const { total } = useCart();
+//   return (
+//     <div className={styles.btnWhatsapp}>
+//       <div className={styles.paneluser}>
+//         <BtnLink link={"/"} title={"HOME"} logo={<AiOutlineHome size={20} />} />
+//         <BtnLink
+//           link={"/featured"}
+//           title={"EXCL"}
+//           logo={<MdOutlineCategory size={20} />}
+//         />
+
+//         <WhatsApp
+//           phoneNumber="+573127527596"
+//           message="Hola, me gustaría obtener más información sobre sus productos."
+//         />
+//         {/* <BtnLink
+//           link={"/ofert"}
+//           title={"OFER"}
+//           logo={<MdOutlineLocalOffer size={20} />}
+//         /> */}
+
+//         <div className={styles.cart}>
+//           <p>{total}</p>
+//           <BtnLink
+//             link={"/cart"}
+//             title={"CART"}
+//             logo={<AiOutlineShoppingCart size={20} />}
+//           />
+//         </div>
+
+//         <BtnModal />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+import React, { useState } from "react";
+import { useCart } from "@/hooks/useCart";
+import { useWhatsApp } from "@/hooks/useWhatsApp";
+
+import { AiOutlineHome, AiOutlineShoppingCart } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { AiOutlineHome } from "react-icons/ai";
+import { BsWhatsapp } from "react-icons/bs";
+
 import styles from "./FooterApp.module.scss";
+
+import { BtnLink, BtnModal } from "../Common";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+} from "reactstrap";
+
 export function FooterApp() {
   const { total } = useCart();
+  const { generateWhatsAppLink, items, selectedItem, handleItemClick } =
+    useWhatsApp();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const addData = () => {
+    const whatsappLink = generateWhatsAppLink(
+      selectedItem,
+      "Hola he visto tu Catálogo, me gustaría obtener más información sobre sus productos."
+    );
+
+    window.location.href = whatsappLink;
+    toggleModal();
+  };
+
   return (
     <div className={styles.btnWhatsapp}>
       <div className={styles.paneluser}>
@@ -16,18 +94,16 @@ export function FooterApp() {
         <BtnLink
           link={"/featured"}
           title={"EXCL"}
-          logo={<MdOutlineCategory size={20} />}
+          logo={<BsSearch size={20} />}
         />
 
-        <WhatsApp
-          phoneNumber="+573127527596"
-          message="Hola, me gustaría obtener más información sobre sus productos."
-        />
-        {/* <BtnLink
-          link={"/ofert"}
-          title={"OFER"}
-          logo={<MdOutlineLocalOffer size={20} />}
-        /> */}
+        <Button
+          className={styles.whatsapp}
+          color="succefull"
+          onClick={() => toggleModal()}
+        >
+          <BsWhatsapp size={30} color="green" />
+        </Button>
 
         <div className={styles.cart}>
           <p>{total}</p>
@@ -38,8 +114,45 @@ export function FooterApp() {
           />
         </div>
 
+        {/* <BtnLink
+          link={"https://cristaleriala10.catalogointeractivo.com.co/admin-dashboard/"}
+          title={"ADMI"}
+          logo={<CiUser size={20} color='#dfc979' />}
+        /> */}
+
         <BtnModal />
       </div>
+     
+
+      <Modal centered isOpen={isOpen} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Seleccione una Linea</ModalHeader>
+
+        <ModalBody>
+          <FormGroup>
+            {items.map((item, index) => (
+              <Button
+                key={index}
+                color="success"
+                outline
+                size="sm"
+                className={index === selectedItem ? "selected" : ""}
+                onClick={() => handleItemClick(item)}
+              >
+                <BsWhatsapp size={20} /> Linea {index + 1}
+              </Button>
+            ))}
+          </FormGroup>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button outline size="sm" color="secondary" onClick={toggleModal}>
+            Cancelar
+          </Button>
+          <Button size="sm" color="success" onClick={addData}>
+            Aceptar
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }

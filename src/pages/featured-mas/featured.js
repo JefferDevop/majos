@@ -1,7 +1,7 @@
 import {
   Footer,
   FooterApp,
-  SearchTable,
+  Exclusive,
   NotFound,
   Redes,
 } from "@/components";
@@ -14,15 +14,20 @@ export default function FeaturedPage(props) {
   const hasProduct = size(products) > 0;
 
   return (
-    <>   
+    <>
+      <BasicLayout>
+      <Redes />
         {hasProduct ? (
-          <SearchTable products={products} />
+          <Exclusive products={products} />
         ) : (
           <NotFound
-            title={"No se encontraron productos"}
+            title={"Uppss... en este momento no hay productos Destacados"}
           />
         )}
-        <FooterApp />    
+
+        <FooterApp />
+        <Footer />
+      </BasicLayout>
     </>
   );
 }
